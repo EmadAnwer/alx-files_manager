@@ -1,4 +1,6 @@
 import crypto from 'crypto';
+import { v4 as uuidv4 } from 'uuid';
+
 import { ObjectId } from 'mongodb';
 import dbClient from '../utils/db';
 import redisClient from '../utils/redis';
@@ -22,7 +24,7 @@ class AuthController {
     if (!findUser) {
       return res.status(401).send({ error: 'Unauthorized' });
     }
-    const token = crypto.randomUUID();
+    const token = uuidv4();
 
     redisClient.set(`auth_${token}`, findUser[0]._id, 86400);
 

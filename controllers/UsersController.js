@@ -23,7 +23,7 @@ class UsersController {
       password: hashPassword,
     });
 
-    return res.status(201).send(result.ops[0]);
+    return res.status(201).send({ id: result.insertedId, email });
   }
 }
 
